@@ -18,7 +18,7 @@ Jenkins master controls builds, and the slave node executes jobs, providing a cl
 isolated environment.
 - Final PHP app runs on **Docker container (port 8080)**  
 
-📸 ![screenshot](image.png)
+📸 <img src="images/snode.png">
 
 ---
 
@@ -30,7 +30,7 @@ Created `install_docker.yml` to automate Docker installation:
 - 🐳 Installs **Docker Engine**  
 - ✅ Enables Docker service  
 
-📸 *Add screenshot of playbook execution here*  
+📸 <img src="images/ansible.png">  
 
 ---
 
@@ -42,8 +42,9 @@ Runs the Ansible playbook on the slave node.
   
   ansible-playbook install_docker.yml
 
-📸 *Add screenshot of playbook execution here*
-
+📸 <img src="images/1.png">
+    <img src="images/2.png">
+    <img src="images/3.png">
 ---
 
 ## 🏗️ 5. Jenkins Job 2: Build_PHP_Docker_Image
@@ -52,7 +53,9 @@ Runs the Ansible playbook on the slave node.
     
   - docker build -t my-php-app .
 
-📸 *Add screenshot of playbook execution here*
+📸 <img src="images/4.png">
+    <img src="images/5.png">
+    <img src="images/6.png">
 
 ---
 
@@ -63,7 +66,8 @@ Deploys the PHP container:
     "docker rm my-php-app || true"
     "docker run -d --name my-php-app -p 8080:80 my-php-app"
 
-📸 *Add screenshot of playbook execution here*
+📸 <img src="images/7.png">
+    <img src="images/8.png">
 
 ---
 
@@ -71,7 +75,8 @@ Deploys the PHP container:
 Stops/removes failed containers
 Keeps the system clean & stable
 
-📸 Screenshot: Cleanup logs
+📸 <img src="images/9.png">
+    <img src="images/10.png">
 
 ---
 
@@ -80,7 +85,7 @@ Keeps the system clean & stable
 ✅ Job 2 → triggers Job 3 (on success)
 ⚠️ Job 3 → triggers Job 4 (on failure)
 
-📸 Screenshot: Jenkins job chaining diagram
+📸 <img src="images/11.png">
 
 ---
 
@@ -90,7 +95,7 @@ Jenkins polls GitHub every minute:
     - H/1 * * * *
 New commits trigger Job 1 → full pipeline automatically
 
-📸 Screenshot: Jenkins job chaining diagram
+📸 <img src="images/12.png">
 
 ---
 
@@ -100,7 +105,7 @@ Jenkins auto-triggers pipeline
 Jobs execute sequentially (Install → Build → Deploy → Cleanup)
 🎉 Final Output → PHP app running in Docker container (http://slave-node:8080)
 
-📸 Screenshot: Running container output
+📸 <img src="images/13.png">
 
 ---
 
