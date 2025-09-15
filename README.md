@@ -38,7 +38,7 @@ Runs the Ansible playbook on the slave node.
 - Configured Git repo / playbook path  
 - Enabled **Poll SCM** for auto-trigger  
 - Executes:  
-  ```bash
+  
   ansible-playbook install_docker.yml
 
 📸 *Add screenshot of playbook execution here*
@@ -48,7 +48,7 @@ Runs the Ansible playbook on the slave node.
 ## 🏗️ 5. Jenkins Job 2: Build_PHP_Docker_Image
 - Clones the PHP project from GitHub
 - Builds the Docker image:
-    ```bash
+    
   - docker build -t my-php-app .
 
 📸 *Add screenshot of playbook execution here*
@@ -57,7 +57,7 @@ Runs the Ansible playbook on the slave node.
 
 ## 🚀 6. Jenkins Job 3: Deploy_PHP_Docker_Container
 Deploys the PHP container:
-    ```bash
+    
     "docker stop my-php-app || true"
     "docker rm my-php-app || true"
     "docker run -d --name my-php-app -p 8080:80 my-php-app"
@@ -85,7 +85,7 @@ Keeps the system clean & stable
 
 ## ⏱️ 9. Triggering Mechanism (Poll SCM)
 Jenkins polls GitHub every minute:
-    ```bash
+    
     - H/1 * * * *
 New commits trigger Job 1 → full pipeline automatically
 
@@ -128,7 +128,7 @@ It ensures repeatable, consistent, and reliable deployments with minimal manual 
 ---
 
 ## 📊 Pipeline Diagram
-    ```bash
+    
     [ GitHub Commit ] 
         |
         v
