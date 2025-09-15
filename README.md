@@ -18,7 +18,7 @@ Jenkins master controls builds, and the slave node executes jobs, providing a cl
 isolated environment.
 - Final PHP app runs on **Docker container (port 8080)**  
 
-📸 <img src="0.png">  
+📸 ![screenshot](image.png)
 
 ---
 
