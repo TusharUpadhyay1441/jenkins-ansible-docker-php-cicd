@@ -48,6 +48,7 @@ Runs the Ansible playbook on the slave node.
 ## 🏗️ 5. Jenkins Job 2: Build_PHP_Docker_Image
 - Clones the PHP project from GitHub
 - Builds the Docker image:
+    ```bash
   - docker build -t my-php-app .
 
 📸 *Add screenshot of playbook execution here*
@@ -56,10 +57,10 @@ Runs the Ansible playbook on the slave node.
 
 ## 🚀 6. Jenkins Job 3: Deploy_PHP_Docker_Container
 Deploys the PHP container:
-- Used :-
-"docker stop my-php-app || true"
-"docker rm my-php-app || true"
-"docker run -d --name my-php-app -p 8080:80 my-php-app"
+    ```bash
+    "docker stop my-php-app || true"
+    "docker rm my-php-app || true"
+    "docker run -d --name my-php-app -p 8080:80 my-php-app"
 
 📸 *Add screenshot of playbook execution here*
 
@@ -84,7 +85,8 @@ Keeps the system clean & stable
 
 ## ⏱️ 9. Triggering Mechanism (Poll SCM)
 Jenkins polls GitHub every minute:
-- H/1 * * * *
+    ```bash
+    - H/1 * * * *
 New commits trigger Job 1 → full pipeline automatically
 
 📸 Screenshot: Jenkins job chaining diagram
@@ -126,18 +128,18 @@ It ensures repeatable, consistent, and reliable deployments with minimal manual 
 ---
 
 ## 📊 Pipeline Diagram
-
-[ GitHub Commit ] 
+    ```bash
+    [ GitHub Commit ] 
         |
         v
-[ Job 1: Install_Docker_Ansible ]
+    [ Job 1: Install_Docker_Ansible ]
         |
         v
-[ Job 2: Build_PHP_Docker_Image ]
+    [ Job 2: Build_PHP_Docker_Image ]
         |
         v
-[ Job 3: Deploy_PHP_Docker_Container ]
+    [ Job 3: Deploy_PHP_Docker_Container ]
         |
    (on failure)
         v
-[ Job 4: Cleanup_Docker_Container ]
+    [ Job 4: Cleanup_Docker_Container ]
