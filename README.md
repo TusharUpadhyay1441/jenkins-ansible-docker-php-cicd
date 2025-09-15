@@ -1,77 +1,143 @@
-## Jenkins CI/CD Pipeline with Ansible and Docker for PHP Project 
+# 🚀 Jenkins CI/CD Pipeline with Ansible and Docker for PHP Project  
 
-# 1. Project Overview 
-This project demonstrates a fully automated CI/CD pipeline using Jenkins, Ansible, and 
-Docker to deploy a PHP application in a Docker container on a Jenkins slave node. It 
-automates Docker installation, Docker image build from GitHub, container deployment, 
-and cleanup on failures.
+## 📌 1. Project Overview  
+This project demonstrates a **fully automated CI/CD pipeline** using **Jenkins, Ansible, and Docker** to deploy a PHP application inside a Docker container on a Jenkins slave node.  
 
-# 2. Environment Setup
-The Jenkins Master-Slave architecture allows distributing build workloads. Here, the 
-Jenkins master controls builds, and the slave node executes jobs, providing a clean, 
-isolated environment. 
-Screenshot:
+✨ Key Features:  
+- 🐧 Automated **Docker installation** with Ansible  
+- 📦 Build Docker images for a **PHP application**  
+- 🚢 Deploy the application container on Jenkins Slave  
+- 🧹 Automatic cleanup on failures  
 
-# 3. Ansible Playbook Creation 
-The install_docker.yml playbook automates Docker Engine installation on the slave 
-node by updating package caches, installing dependencies, adding Docker’s repository 
-and GPG key, installing Docker, and enabling its service. 
-Screenshot: 
+---
 
-# 4. Jenkins Job 1: Install_Docker_Ansible 
-This job runs the Ansible playbook on the slave node to prepare it for Docker 
-deployments. 
- Configured with Git repo (or local playbook path). 
- Poll SCM enabled for automatic triggering. 
- Executes ansible-playbook command. 
-Screenshots:
+## ⚙️ 2. Environment Setup  
+- **Jenkins Master-Slave Architecture**:  
+  - 🖥️ Jenkins **Master** → controls and manages jobs  
+  - 💻 Jenkins **Slave** → executes jobs in isolated environments  
+- Final PHP app runs on **Docker container (port 8080)**  
 
-# 5. Jenkins Job 2: Build_PHP_Docker_Image 
-Job 2 clones the PHP project and builds the Docker image: 
- Git repo URL and branch configured. 
- Runs docker build -t my-php-app . in the workspace root. 
-Screenshots:
+📸 *Add screenshot of Jenkins Master-Slave config here*  
 
-# 6. Jenkins Job 3: Deploy_PHP_Docker_Container 
-Job 3 stops/removes existing containers and deploys a new container exposing port 
-8080: 
-bash 
-docker stop my-php-app || true 
-docker rm my-php-app || true 
-docker run -d --name my-php-app -p 8080:80 my-php-app 
-Screenshots:
+---
 
-# 7. Jenkins Job 4: Cleanup_Docker_Container 
-Handles cleanup on deployment failure by stopping and removing the Docker container 
-to maintain system hygiene. 
-Screenshots: 
+## 📜 3. Ansible Playbook Creation  
+Created `install_docker.yml` to automate Docker installation:  
+- 🔄 Updates package cache  
+- 📥 Installs dependencies  
+- 🔑 Adds Docker repo & GPG key  
+- 🐳 Installs **Docker Engine**  
+- ✅ Enables Docker service  
 
-# 8. Job Chaining and Pipeline Flow 
-Jobs are chained using Post-build Actions, enabling fully automated progression: 
- Job 1 triggers Job 2 on success. 
- Job 2 triggers Job 3 on success. 
- Job 3 triggers Job 4 on failure. 
-Screenshot:
+📸 *Add screenshot of playbook execution here*  
 
-# 9. Triggering Mechanism via Poll SCM 
-Jenkins polls the Git repository every minute (H/1 * * * *), identifying new commits and 
-triggering Job 1 automatically, bypassing the complexity of setting up webhooks or 
-exposing Jenkins publicly. 
-Screenshot: 
+---
 
-# 10. Running the Pipeline 
-Code pushes to GitHub trigger the pipeline, with builds appearing in Jenkins Dashboard 
-and job console outputs showing each stage’s success, culminating in a deployed 
-Dockerized PHP application accessible via port 8080 on the slave node. 
-Screenshots: 
+## 🛠️ 4. Jenkins Job 1: Install_Docker_Ansible  
+Runs the Ansible playbook on the slave node.  
+- Configured Git repo / playbook path  
+- Enabled **Poll SCM** for auto-trigger  
+- Executes:  
+  ```bash
+  ansible-playbook install_docker.yml
 
-# 11. Troubleshooting and Solutions 
-Encountered issues included: 
- SSH key verification errors solved by manual key acceptance. 
- Password prompts on sudo fixed by granting passwordless sudo to Jenkins user. 
- Apt lock conflicts resolved by killing stalled processes and removing lock files.
+📸 *Add screenshot of playbook execution here*
 
-# Conclusion 
-This project successfully implements an automated Jenkins pipeline integrating Ansible 
-and Docker to build and deploy a PHP web app. The approach ensures consistent, 
-repeatable deployments, reducing manual eAort and errors.
+---
+
+## 🏗️ 5. Jenkins Job 2: Build_PHP_Docker_Image
+- Clones the PHP project from GitHub
+- Builds the Docker image:
+  - docker build -t my-php-app .
+
+📸 *Add screenshot of playbook execution here*
+
+---
+
+## 🚀 6. Jenkins Job 3: Deploy_PHP_Docker_Container
+Deploys the PHP container:
+- Used :-
+"docker stop my-php-app || true"
+"docker rm my-php-app || true"
+"docker run -d --name my-php-app -p 8080:80 my-php-app"
+
+📸 *Add screenshot of playbook execution here*
+
+---
+
+## 🧹 7. Jenkins Job 4: Cleanup_Docker_Container
+Stops/removes failed containers
+Keeps the system clean & stable
+
+📸 Screenshot: Cleanup logs
+
+---
+
+## 🔗 8. Job Chaining & Pipeline Flow
+✅ Job 1 → triggers Job 2 (on success)
+✅ Job 2 → triggers Job 3 (on success)
+⚠️ Job 3 → triggers Job 4 (on failure)
+
+📸 Screenshot: Jenkins job chaining diagram
+
+---
+
+## ⏱️ 9. Triggering Mechanism (Poll SCM)
+Jenkins polls GitHub every minute:
+- H/1 * * * *
+New commits trigger Job 1 → full pipeline automatically
+
+📸 Screenshot: Jenkins job chaining diagram
+
+---
+
+## ▶️ 10. Running the Pipeline
+Push code to GitHub
+Jenkins auto-triggers pipeline
+Jobs execute sequentially (Install → Build → Deploy → Cleanup)
+🎉 Final Output → PHP app running in Docker container (http://slave-node:8080)
+
+📸 Screenshot: Running container output
+
+---
+
+## 🛠️ 11. Troubleshooting & Fixes
+🔑 SSH key issues → accepted manually
+🔓 Sudo password prompts → fixed with passwordless sudo
+🔒 Apt lock conflicts → resolved by killing processes & removing locks
+
+---
+
+## ✅ Conclusion
+
+This project shows how to integrate Jenkins + Ansible + Docker for end-to-end CI/CD automation.
+It ensures repeatable, consistent, and reliable deployments with minimal manual effort.
+
+---
+
+## 🧰 Technologies Used
+
+🐳 Docker
+⚙️ Jenkins
+📜 Ansible
+🐘 PHP
+🌐 Git/GitHub
+
+---
+
+## 📊 Pipeline Diagram
+
+[ GitHub Commit ] 
+        |
+        v
+[ Job 1: Install_Docker_Ansible ]
+        |
+        v
+[ Job 2: Build_PHP_Docker_Image ]
+        |
+        v
+[ Job 3: Deploy_PHP_Docker_Container ]
+        |
+   (on failure)
+        v
+[ Job 4: Cleanup_Docker_Container ]
