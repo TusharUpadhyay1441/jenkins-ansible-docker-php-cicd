@@ -13,11 +13,12 @@ This project demonstrates a **fully automated CI/CD pipeline** using **Jenkins, 
 
 ## ⚙️ 2. Environment Setup  
 - **Jenkins Master-Slave Architecture**:  
-  - 🖥️ Jenkins **Master** → controls and manages jobs  
-  - 💻 Jenkins **Slave** → executes jobs in isolated environments  
+  - 🖥️ The Jenkins Master-Slave architecture allows distributing build workloads. Here, the 
+Jenkins master controls builds, and the slave node executes jobs, providing a clean, 
+isolated environment.
 - Final PHP app runs on **Docker container (port 8080)**  
 
-📸 *Add screenshot of Jenkins Master-Slave config here*  
+📸 <img src="0.png">  
 
 ---
 
