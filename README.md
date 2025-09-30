@@ -1,7 +1,7 @@
 # 🚀 Jenkins CI/CD Pipeline with Ansible and Docker for PHP Project  
 
 ## 📌 1. Project Overview  
-This project demonstrates a **fully automated CI/CD pipeline** using **Jenkins, Ansible, and Docker** to deploy a PHP application inside a Docker container on a Jenkins slave node.  
+In this project i have use real case scenario and demonstrated a **fully automated CI/CD pipeline** using **Jenkins, Ansible, and Docker** to deploy a PHP application inside a Docker container on a Jenkins slave node.  
 
 ✨ Key Features:  
 - 🐧 Automated **Docker installation** with Ansible  
