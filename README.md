@@ -1,7 +1,7 @@
 # 🚀 Jenkins CI/CD Pipeline with Ansible and Docker for PHP Project  
 
 ## 📌 1. Project Overview  
-In this project i have use real case scenario and demonstrated a **fully automated CI/CD pipeline** using **Jenkins, Ansible, and Docker** to deploy a PHP application inside a Docker container on a Jenkins slave node.  
+This project demonstrates a fully automated CI/CD pipeline using Jenkins, Ansible, and Docker to deploy a PHP application inside a Docker container on a Jenkins slave node. 
 
 ✨ Key Features:  
 - 🐧 Automated **Docker installation** with Ansible  
@@ -16,14 +16,14 @@ In this project i have use real case scenario and demonstrated a **fully automat
   - 🖥️ The Jenkins Master-Slave architecture allows distributing build workloads. Here, the 
 Jenkins master controls builds, and the slave node executes jobs, providing a clean, 
 isolated environment.
-- Final PHP app runs on **Docker container (port 8080)**  
+- The final PHP application runs inside a Docker container on port 8080 on the Jenkins slave node. 
 
 📸 <img src="images/snode.png">
 
 ---
 
 ## 📜 3. Ansible Playbook Creation  
-Created `install_docker.yml` to automate Docker installation:  
+Ansible playbook install_docker.yml automates Docker installation with these tasks: 
 - 🔄 Updates package cache  
 - 📥 Installs dependencies  
 - 🔑 Adds Docker repo & GPG key  
@@ -35,7 +35,7 @@ Created `install_docker.yml` to automate Docker installation:
 ---
 
 ## 🛠️ 4. Jenkins Job 1: Install_Docker_Ansible  
-Runs the Ansible playbook on the slave node.  
+- Runs the Ansible playbook on the slave node to install Docker.  
 - Configured Git repo / playbook path  
 - Enabled **Poll SCM** for auto-trigger  
 - Executes:  
@@ -72,8 +72,7 @@ Deploys the PHP container:
 ---
 
 ## 🧹 7. Jenkins Job 4: Cleanup_Docker_Container
-Stops/removes failed containers
-Keeps the system clean & stable
+Stops and removes failed containers to keep the environment clean and stable.
 
 📸 <img src="images/9.png">
     <img src="images/10.png">
@@ -90,7 +89,7 @@ Keeps the system clean & stable
 ---
 
 ## ⏱️ 9. Triggering Mechanism (Poll SCM)
-Jenkins polls GitHub every minute:
+Jenkins polls GitHub every minute to automatically trigger the full pipeline on new commits:
     
     - H/1 * * * *
 New commits trigger Job 1 → full pipeline automatically
@@ -102,7 +101,7 @@ New commits trigger Job 1 → full pipeline automatically
 ## ▶️ 10. Running the Pipeline
 Push code to GitHub
 Jenkins auto-triggers pipeline
-Jobs execute sequentially (Install → Build → Deploy → Cleanup)
+Jenkins auto-triggers the pipeline jobs sequentially (Install → Build → Deploy → Cleanup)
 🎉 Final Output → PHP app running in Docker container (http://slave-node:8080)
 
 📸 <img src="images/13.png">
@@ -118,8 +117,7 @@ Jobs execute sequentially (Install → Build → Deploy → Cleanup)
 
 ## ✅ Conclusion
 
-This project shows how to integrate Jenkins + Ansible + Docker for end-to-end CI/CD automation.
-It ensures repeatable, consistent, and reliable deployments with minimal manual effort.
+This project integrates Jenkins, Ansible, and Docker for fully automated CI/CD deployment, enabling reliable and consistent application delivery with minimal manual effort.
 
 ---
 
